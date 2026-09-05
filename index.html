@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PKH Tools - Kabupaten Kediri</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="loadingScreen" class="loading">Memuat...</div>
+
+  <!-- ===================== LOGIN ===================== -->
+  <div id="loginScreen" class="card hidden">
+    <h1>PKH Tools</h1>
+    <div class="subtitle">Kabupaten Kediri — Login Pendamping</div>
+    <label>NIP</label>
+    <input type="text" id="loginNip" placeholder="Masukkan NIP">
+    <label>Password</label>
+    <input type="password" id="loginPassword" placeholder="Password (awal = NIK Anda)">
+    <button onclick="doLogin()">Masuk</button>
+    <div id="loginMsg"></div>
+  </div>
+
+  <!-- ===================== GANTI PASSWORD ===================== -->
+  <div id="changePasswordScreen" class="card hidden">
+    <h1>Buat Password Baru</h1>
+    <div class="subtitle">Ini login pertama Anda. Buat password sendiri (jangan pakai NIK lagi).</div>
+    <label>Password Baru (minimal 6 karakter)</label>
+    <input type="password" id="newPassword1">
+    <label>Ulangi Password Baru</label>
+    <input type="password" id="newPassword2">
+    <button onclick="doChangePassword()">Simpan Password</button>
+    <div id="changePasswordMsg"></div>
+  </div>
+
+  <!-- ===================== APLIKASI UTAMA ===================== -->
+  <div id="appScreen" class="hidden">
+    <div class="topbar">
+      <div><strong id="namaUser"></strong><br><span class="small-muted">NIP: <span id="nipUser"></span></span></div>
+      <button class="secondary small" onclick="doLogout()">Keluar</button>
+    </div>
+
+    <div class="card">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="showTab('tabIdentitas', event)">Identitas</button>
+        <button class="tab-btn" onclick="showTab('tabKeluarga', event)">Keluarga</button>
+        <button class="tab-btn" onclick="showTab('tabWilayah', event)">Wilayah Kerja</button>
+      </div>
+
+      <!-- TAB IDENTITAS -->
+      <div id="tabIdentitas" class="tab-content active">
+        <h2>Kontak</h2>
+        <label>Email Aktif</label>
+        <input type="email" id="fEmail">
+        <label>No. HP / WA Aktif</label>
+        <input type="text" id="fNoHp">
+
+        <h2>Kontak Darurat</h2>
+        <label>Nama</label>
+        <input type="text" id="fKontakDaruratNama">
+        <label>No. HP</label>
+        <input type="text" id="fKontakDaruratHp">
+
+        <h2>Akun Media Sosial Tugas</h2>
+        <div class="subtitle">Untuk keperluan repost konten Kementerian Sosial</div>
+        <label>Facebook</label>
+        <input type="text" id="fAkunFb" placeholder="link/username">
+        <label>Instagram</label>
+        <input type="text" id="fAkunIg" placeholder="link/username">
+        <label>Threads</label>
+        <input type="text" id="fAkunThreads" placeholder="link/username">
+        <label>X (Twitter)</label>
+        <input type="text" id="fAkunX" placeholder="link/username">
+        <label>Telegram</label>
+        <input type="text" id="fAkunTelegram" placeholder="link/username">
+
+        <button onclick="doSaveIdentitas()">Simpan Identitas</button>
+        <div id="identitasMsg"></div>
+      </div>
+
+      <!-- TAB KELUARGA -->
+      <div id="tabKeluarga" class="tab-content">
+        <div class="subtitle">Untuk keperluan klaim Taspen. Tambahkan pasangan dan/atau anak.</div>
+        <div id="keluargaList"></div>
+        <button class="secondary small" onclick="addKeluargaRow()">+ Tambah Anggota Keluarga</button>
+        <br>
+        <button onclick="doSaveKeluarga()">Simpan Data Keluarga</button>
+        <div id="keluargaMsg"></div>
+      </div>
+
+      <!-- TAB WILAYAH -->
+      <div id="tabWilayah" class="tab-content">
+        <div class="subtitle">Kecamatan & desa yang menjadi wilayah kerja Anda. Bisa lebih dari satu desa.</div>
+        <div id="wilayahList"></div>
+        <button class="secondary small" onclick="addWilayahRow()">+ Tambah Desa Binaan</button>
+        <br>
+        <button onclick="doSaveWilayah()">Simpan Wilayah Kerja</button>
+        <div id="wilayahMsg"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
