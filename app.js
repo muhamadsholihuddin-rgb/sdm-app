@@ -127,11 +127,19 @@ function loadMyData() {
 }
 
 // ---------- TABS ----------
-function showTab(tabId, evt) {
+function showTab(tabId, btnEl) {
   document.querySelectorAll(".tab-content").forEach((el) => el.classList.remove("active"));
-  document.querySelectorAll(".tab-btn").forEach((el) => el.classList.remove("active"));
+  document.querySelectorAll(".nav-btn").forEach((el) => el.classList.remove("active"));
   document.getElementById(tabId).classList.add("active");
-  if (evt && evt.target) evt.target.classList.add("active");
+  const btn = btnEl || document.getElementById("navBtn-" + tabId);
+  if (btn) btn.classList.add("active");
+}
+
+// ---------- PWA: registrasi service worker (biar bisa dipakai offline shell-nya) ----------
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").catch(() => {});
+  });
 }
 
 // ---------- SIMPAN IDENTITAS ----------
